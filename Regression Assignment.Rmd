@@ -1,0 +1,187 @@
+---
+title: "Regression Assignment"
+author: "Rizza Pudao"
+date: "2023-02-04"
+output: html_document
+---
+
+##### **Introduction**
+
+This is about regression. we are going to perform regression analysis using marketing data of the datarium package in r.
+
+##### **The Data**
+
+The marketing data has 200 observations and 4 variables namely; youtube, facebook, newspaper, and sales.
+
+```{r echo=FALSE, results='hide'}
+library(tidyverse) 
+library(caret) 
+theme_set (theme_bw())
+```
+
+```{r echo=FALSE, results='hide'}
+# install datarium if not installed at the console
+library(datarium) # loading datarium
+```
+
+```{r echo=FALSE, results='markup'}
+# load the data
+data ("marketing", package = "datarium")
+sample_n(marketing, 3)
+```
+
+```{r echo=FALSE, results='markup'}
+# Split the data into training and test set
+set.seed(123)
+training.samples <- marketing$sales %>%
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- marketing[training.samples, ]
+test.data <- marketing[-training.samples, ]
+```
+
+```{r echo=FALSE, results='markup'}
+# Build the model
+model <- lm(sales ~., data = train.data)
+# Summarize the model
+summary(model)
+# Make predictions
+predictions <- model %>% predict(test.data)
+# Model performance
+# (a) Prediction error, RMSE
+RMSE(predictions, test.data$sales)
+# (b) R-square
+R2(predictions, test.data$sales)
+```
+
+```{r echo=FALSE, results='markup'}
+# predicting with new data
+# using the model
+youtube <- 30
+facebook <- 45
+newspaper <- 13
+a <- data.frame (youtube = 30,
+                 facebook = 45,
+                 newspaper = 13)
+a <- data.frame(youtube, facebook, newspaper)
+p <- model%>% predict(a)
+p
+```
+
+our model is as follows:
+$$\hat{y} = 3.59 + 0.04x_1 +0.19x_2 + \epsilon$$
+where $\hat{y}$is sales, 5x_1 is youtube, 5x_2 is facebook, and $\epsilon$ is the error term.
+
+
+# ***`Simple linear regression`***
+
+This  shows the estimate of the regression beta coefficients (column Estimate) and their significance levels (column Pr(>|t|). The intercept (b0) is 8.58 and the coefficient of youtube variable is 0.046.
+
+
+```{r echo=FALSE, results='markup'}
+model <- lm(sales ~ youtube, data = train.data)
+summary(model)$coef
+```
+This table shows the predictions on the sales units for two youtube advertising budget: 0 and 1000 made using the R function predict()
+```{r echo=FALSE, results='markup'}
+newdata <- data.frame(youtube = c(0,  1000))
+model %>% predict(newdata)
+```
+
+# ***`Multiple linear regression`***
+This data illustrates the predictions of sales based on the budget invested in three advertising medias: youtube, facebook and newspaper.
+
+```{r echo=FALSE, results='markup'}
+model <- lm(sales ~ youtube + facebook + newspaper, 
+            data = train.data)
+summary(model)$coef
+```
+
+also shows the beta coefficient estimates and their significance levels. 
+```{r echo=FALSE, results='markup'}
+model <- lm(sales ~., data = train.data)
+summary(model)$coef
+```
+
+This shows the result of predictions using the R function predict()
+```{r echo=FALSE, results='markup'}
+# New advertising budgets
+newdata <- data.frame(youtube = 30, facebook = 45,
+  newspaper = 13)
+# Predict sales values
+model %>% predict(newdata)
+```
+
+# ***`Model summary`***
+This summary outputs shows 6 components, including:
+
+##### **1.Call**
+it Shows the function call used to compute the regression model.
+
+##### **2. Residuals**
+Provide a quick view of the distribution of the residuals, which by definition have a mean zero. Therefore, the median should not be far from zero, and the minimum and maximum should be roughly equal in absolute value.
+
+##### **3.Coefficients**
+Shows the regression beta coefficients and their statistical significance. Predictor variables, that are significantly associated to the outcome variable, are marked by stars.
+
+##### **4. Residual standard error (RSE)**
+
+##### **5.R-squared (R2)**
+
+##### **6.F-statistic**
+Residual standard error (RSE), R-squared (R2) and the F-statistic are metrics that are used to check how well the model fits to our data.
+
+```{r echo=FALSE, results='markup'}
+summary(model)
+```
+
+# ***`Coefficients significance`***
+This shows the estimate of regression beta coefficients and the associated t-statistic p-values.
+
+```{r echo=FALSE, results='markup'}
+summary(model)$coef
+```
+
+
+```{r echo=FALSE, results='markup'}
+model <- lm(sales ~ youtube + facebook, data = train.data)
+summary(model)
+```
+
+# ***`Making predictions`***
+This shows predictions using the test data in order to evaluate the performance of our regression model. 
+it Predict the sales values based on new advertising budgets in the test data
+
+```{r echo=FALSE, results='markup'}
+# Make predictions
+predictions <- model %>% predict(test.data)
+# Model performance
+# (a) Compute the prediction error, RMSE
+RMSE(predictions, test.data$sales)
+```
+
+The table above shows the computed assessment of the model performance using the prediction error RMSE (Root Mean Squared Error).
+ 
+```{r echo=FALSE, results='markup'}
+# (b) Compute R-square
+R2(predictions, test.data$sales)
+```
+The table above  shows the computed assessment of the model performance using the The R-square (R2).
+
+# ***`Plot`***
+This shows a linearly increasing relationship between the sales and the youtube variables.
+```{r echo=FALSE, results='markup'}
+ggplot(marketing, aes(x = youtube, y = sales)) +
+  geom_point() +
+  stat_smooth()
+```
+
+
+
+
+
+
+
+
+
+
+
