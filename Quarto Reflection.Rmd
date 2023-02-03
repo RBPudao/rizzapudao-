@@ -1,0 +1,29 @@
+---
+title: "Quarto Reflection"
+author: "Rizza Pudao"
+date: "2023-02-04"
+output: html_document
+---
+
+
+**`1. What package are they talking about?`**
+
+- They are talking about **Quarto**, an open-source scientific and technical publishing system built on Pandoc.
+
+**`2. Why is there a need to shift from markdown to the said package?`**
+
+- Quarto is RStudio's multilingual, next-generation R Markdown product, featuring a host of brand-new features and functionalities, and renders most existing Rmd files without changing them because, like R Markdown, it uses Knitr to run R code. There’s a need to shift from markdown to the said package because It has numerous other built-in output formats and many more options for customizing each format. Additionally, it also includes built-in capabilities for unique project types including websites, books, and blogs rather than relying on external packages. And since Quarto is open source, others can also contribute to its functionality by writing extensions. You can export Quarto documents in more than 40 different file formats including Word, OpenOffice, PowerPoint, ePub, Jira Wiki, Jupyter, Observable JS, complete websites, and ebooks. R Markdown can generate some of those, but not all. There are also some useful conversion functions, such as converting between .ipynb Jupyter notebooks and .qmd Quarto documents that can be read by any text editor. Quarto doesn't have a dependency or requirement for R. Unlike to R Markdown wherein it is fundamentally tied to R which severely limits the number of practitioners it can benefit. In other words, cool new features are much more likely to appear in Quarto.
+
+**`3. What inspired/sparked the said shift?`**
+
+- "Quarto enables collaborating across coding languages," Julia Stewart. aims to highlight errors before you try rendering your document and finding out that it won’t work. And it doesn't have a dependency or requirement for R.
+
+**`4. Are you up to the challenge of the said shift, learning and applying it on your future as math teachers?`**
+
+- It is said that Quarto is open source, which allows anyone to contribute to its functionality by writing extensions, serves as assistance in writing YAML, and helps us to highlight errors before rendering our document. In addition, since Quarto is open source Another draw is the "high internal consistency," which allows for the same syntax to be used in a wider variety of languages and formats. 
+yes! Since I was unfamiliar with this shift in the first place, I am up for the challenge, but I'm still eager to learn about it and use and apply it because I believe it can be of great benefit to me as a future math teacher. 
+
+**`5. what said features in the package did you like best ?please discuss.`**
+
+- "Quarto enables collaborating across coding languages," Julia Stewart.  Quarto is intended to be helpful for anyone who wishes to write repeatable documents. Unlike R Markdown docs, which use R and knitr to render your text, Quarto does not require R. Quarto divides calculations into distinct pluggable language "engines," which makes it simpler to provide this cross-language capability. You can export Quarto documents in more than 40 different file formats including Word, OpenOffice, PowerPoint, ePub, Jira Wiki, Jupyter, Observable JS, complete websites, and ebooks. Additionally, it also includes built-in capabilities for unique project types including websites, books, and blogs rather than relying on external packages.
+
